@@ -2,13 +2,13 @@ import React from 'react';
 import Navbar from '../components/Logo/Navbar';
 import { Outlet } from 'react-router';
 
-const MainLayout = () => {
+const AuthLayout = () => {
     return (
         <div>
-          <Navbar/>
-          <Outlet/>
+           <Navbar/>
+           <Outlet/>
         </div>
     );
 };
 
-export default MainLayout;
+export default AuthLayout;

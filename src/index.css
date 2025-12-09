@@ -8,3 +8,7 @@
   --color-primary: #023A15;
   --color-secondary: #F09C96;
 }
+
+a.active{
+  @apply border
+}
