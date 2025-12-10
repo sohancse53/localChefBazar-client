@@ -22,7 +22,7 @@ const Register = () => {
   const handleRegister = (data) => {
     setLoading(true);
     console.log(data);
-    const imgbbURl = `https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMGBB_API_KEY}`;
+    const imgbbURl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`;
 
     const photo = data.photo[0];
     registerUser(data.email, data.password)

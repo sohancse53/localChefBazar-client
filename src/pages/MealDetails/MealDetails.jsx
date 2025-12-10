@@ -1,17 +1,23 @@
 import React, { useRef } from "react";
 import { Link, useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 import { MdFavoriteBorder, MdOutlineReviews } from "react-icons/md";
 import Reviews from "../Reviews/Reviews";
 import useAuth from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const MealDetails = () => {
   const { user } = useAuth();
   const modalRef = useRef("");
+const queryClient = useQueryClient();
+
+  const { register, handleSubmit, formState: { errors }, } = useForm()
 
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
+
   const { data: meal } = useQuery({
     queryKey: ["meal", id],
     queryFn: async () => {
@@ -20,8 +26,23 @@ const MealDetails = () => {
     },
   });
 
-  const handleMakeReview = () => {
-    console.log("click");
+  const handleMakeReview = (data) => {
+    const reviewInfo = {
+      foodId: meal?._id,
+      reviewerName: user?.displayName,
+      reviewerImage: user?.photoURL,
+      rating: data.rating,
+      comment:data.comment
+    }
+    axiosSecure.post('/reviews',reviewInfo)
+    .then(res=>{
+      if(res.data.insertedId){
+        toast.success('Review added');
+         queryClient.invalidateQueries(["reviews", meal?._id]);
+        // modalRef.current.close();
+      }
+    })
+
   };
 
   const handleModal = () => {
@@ -115,19 +136,22 @@ const MealDetails = () => {
         className="modal modal-bottom sm:modal-middle"
       >
         <div className="modal-box ">
-          <h3 className="font-bold text-lg">Add a Review</h3>
-          <form className="flex flex-col gap-5 w-full">
-            <textarea className="textarea w-full" placeholder="comment"></textarea>
-            <label className="text-primary font-bold">Rating</label>
-            <select defaultValue="Medium" className="select w-1/3">
+          <h3 className="font-bold text-lg mb-5">Add a Review</h3>
+          <form onSubmit={handleSubmit(handleMakeReview)} className="flex flex-col  w-full">
+            <textarea {...register('comment',{required:true})} className="textarea w-full" placeholder="comment"></textarea>
+            {
+              errors.comment && <p className="text-red-400">Please write comment</p>
+            }
+            <label className="text-primary font-bold">Rating: </label>
+            <select {...register('rating')} defaultValue="Medium" className="select w-1/3">
               <option disabled={true}>Give Rating</option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
               <option>4</option>
               <option>5</option>
-           
             </select>
+            <button type="submit" className="btn btn-primary mt-5">Add Review</button>
           </form>
           <div className="modal-action">
             <form method="dialog">
@@ -140,7 +164,7 @@ const MealDetails = () => {
       {/* modal section ends */}
 
       {/* review section */}
-      <Reviews />
+      <Reviews  foodId={meal?._id}/>
     </div>
   );
 };
