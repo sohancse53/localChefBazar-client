@@ -10,5 +10,5 @@
 }
 
 a.active{
-  @apply border
+  @apply border-b-3 border-secondary
 }

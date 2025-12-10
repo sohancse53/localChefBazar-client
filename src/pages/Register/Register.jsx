@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const Register = () => {
+  const [loading,setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -18,10 +20,9 @@ const Register = () => {
   const axiosSecure = useAxiosSecure();
 
   const handleRegister = (data) => {
+    setLoading(true);
     console.log(data);
-    const imgbbURl = `https://api.imgbb.com/1/upload?key=${
-      import.meta.env.VITE_IMGBB_API_KEY
-    }`;
+    const imgbbURl = `https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_IMGBB_API_KEY}`;
 
     const photo = data.photo[0];
     registerUser(data.email, data.password)
@@ -38,6 +39,7 @@ const Register = () => {
           const userProfile = {
             displayName: data.name,
             photoURL: photoURL,
+    
           };
 
           //   user crearte in DB
@@ -45,6 +47,7 @@ const Register = () => {
             email: data.email,
             displayName: data.name,
             photoURL: photoURL,
+            address:data.address,
           };
           axiosSecure.post("/users", userInfo).then((res) => {
             if (res.data.insertedId) {
@@ -56,14 +59,19 @@ const Register = () => {
             .then(() => {
               console.log("profile updated");
               navigate(location.state || "/");
+              toast.success('Registration successful');
             })
             .catch((err) => {
               console.log(err);
+              toast.error(err.message)
+              setLoading(false);
             });
         });
       })
       .catch((err) => {
         console.log(err);
+        toast.error(err.message);
+         setLoading(false);
       });
   };
 
@@ -165,7 +173,11 @@ const Register = () => {
             </p>
           )}
 
-          <button className="btn btn-primary mt-4">Register</button>
+          <button className="btn btn-primary mt-4">Register
+          {
+            loading && <span className="loading loading-spinner"></span>
+          }
+          </button>
 
           <p className="text-center text-lg">
             Already Have an Account?{" "}
