@@ -37,7 +37,9 @@ const queryClient = useQueryClient();
       reviewerName: user?.displayName,
       reviewerImage: user?.photoURL,
       rating: data.rating,
-      comment:data.comment
+      comment:data.comment,
+      reviewerEmail:user?.email,
+      foodName:meal?.foodName,
     }
     axiosSecure.post('/reviews',reviewInfo)
     .then(res=>{
