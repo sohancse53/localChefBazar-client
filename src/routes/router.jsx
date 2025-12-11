@@ -9,6 +9,9 @@ import MealDetails from "../pages/MealDetails/MealDetails";
 import PrivateRoute from "./PrivateRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import Order from "../pages/Order/Order";
+import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardHome from "../pages/dashboard/DashboardHome";
+import MyOrders from "../pages/dashboard/MyOrders";
 
 const router = createBrowserRouter([
 
@@ -50,8 +53,19 @@ const router = createBrowserRouter([
 
 // dashboard layout 
     {
-
-
+        path:'dashboard',
+        element:<DashboardLayout/>,
+        children:[
+            {
+               index:true,
+                element:<DashboardHome/>
+            },
+            {
+               path:'my-orders',
+                element:<MyOrders/>
+            },
+        ]
+        
     },
 
 
