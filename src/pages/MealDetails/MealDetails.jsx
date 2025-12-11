@@ -7,6 +7,7 @@ import Reviews from "../Reviews/Reviews";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { FaHeart } from "react-icons/fa";
 
 const MealDetails = () => {
   const { user } = useAuth();
@@ -26,6 +27,10 @@ const queryClient = useQueryClient();
     },
   });
 
+   const handleModal = () => {
+    modalRef.current.showModal();
+  };
+
   const handleMakeReview = (data) => {
     const reviewInfo = {
       foodId: meal?._id,
@@ -39,15 +44,35 @@ const queryClient = useQueryClient();
       if(res.data.insertedId){
         toast.success('Review added');
          queryClient.invalidateQueries(["reviews", meal?._id]);
-        // modalRef.current.close();
+        modalRef.current.close();
       }
     })
 
   };
+ 
 
-  const handleModal = () => {
-    modalRef.current.showModal();
-  };
+  const handleFavorite = ()=>{
+    const favoriteInfo = {
+      userEmail:user?.email,
+      foodId:meal?._id,
+      foodName:meal?.foodName,
+      chefId:meal?.chefId,
+      chefName:meal?.chefName,
+      price:meal?.price
+    }
+    axiosSecure.post('/favorite-food',favoriteInfo)
+    .then(res=>{
+      if(res.data.insertedId){
+        toast.success("added to favorite");
+      }
+      else{
+        toast.error('Already added')
+      }
+    })
+   
+  }
+
+
 
   return (
     <div className="min-h-screen bg-white p-6 md:p-12">
@@ -69,7 +94,7 @@ const queryClient = useQueryClient();
           <img
             src={meal?.foodImage}
             alt={meal?.foodName}
-            className="rounded-2xl w-full h-auto object-cover shadow-md"
+            className="rounded-2xl w-80 h-80 object-cover shadow-md"
           />
         </div>
 
@@ -109,9 +134,9 @@ const queryClient = useQueryClient();
           </div>
 
           {/* Some  Buttons */}
-          <div className="flex gap-4 flex-wrap">
+          <div className="flex gap-4 flex-wrap items-center">
             {/* order button */}
-            <button className="btn btn-xs  btn-primary">Order Now</button>
+            <Link to={`/order/${meal?._id}`} className="btn btn-xs  btn-primary">Order Now</Link>
 
             {/* review button */}
             <button onClick={handleModal} className="btn btn-xs  btn-secondary">
@@ -119,8 +144,8 @@ const queryClient = useQueryClient();
             </button>
 
             {/* favorite button */}
-            <button className="btn  btn-xs text-primary">
-              Add to favorite <MdFavoriteBorder />
+            <button onClick={handleFavorite} data-tip="Add to favorite" className="tooltip btn   btn-circle text-primary">
+              <FaHeart size={20} color="red"/>  
             </button>
           </div>
         </div>

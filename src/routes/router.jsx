@@ -6,6 +6,9 @@ import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
 import Meals from "../pages/Meals/Meals";
 import MealDetails from "../pages/MealDetails/MealDetails";
+import PrivateRoute from "./PrivateRoutes";
+import PrivateRoutes from "./PrivateRoutes";
+import Order from "../pages/Order/Order";
 
 const router = createBrowserRouter([
 
@@ -24,7 +27,22 @@ const router = createBrowserRouter([
             },
             {
                 path:'/meal-details/:id',
-                Component:MealDetails
+                element:
+                <PrivateRoutes>
+
+                    <MealDetails/>
+                </PrivateRoutes>
+                
+            },
+            {
+                path:'/order/:id',
+                element:
+                <PrivateRoutes>
+
+                    <Order/>
+                </PrivateRoutes>,
+                loader:()=>fetch('/location.json')
+                
             },
 
         ]
