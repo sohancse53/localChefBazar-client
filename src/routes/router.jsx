@@ -48,6 +48,13 @@ const router = createBrowserRouter([
         ]
     },
 
+// dashboard layout 
+    {
+
+
+    },
+
+
 
     // auth layout
     {

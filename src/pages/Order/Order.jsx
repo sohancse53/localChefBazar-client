@@ -4,6 +4,7 @@ import { useLoaderData, useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Order = () => {
   const {
@@ -55,6 +56,7 @@ const Order = () => {
 
   // Submit handler
   const handleOrder = (data) => {
+    // order object
     const orderInfo = {
       foodId: meal?._id,
       foodName: data.foodName,
@@ -70,6 +72,31 @@ const Order = () => {
       userAddress: `${data.userArea}, ${data.userCity}, ${data.userRegion}`,
       quantity: data.quantity,
     };
+
+    const cost = data.quantity * data.price;
+
+    // post to DB using yes no sweet Alert
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Total cost for this Order is Tk ${cost}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirm  Order!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.post("/orders", orderInfo).then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              title: "Confirmed!",
+              text: "Your Order has been Confirmed.",
+              icon: "success"
+            });
+          }
+        });
+      }
+    });
 
     console.log(orderInfo);
   };
@@ -202,8 +229,8 @@ const Order = () => {
             className="input w-full"
           />
 
-          <button className="btn btn-neutral mt-4" type="submit">
-            Proceed To Payment
+          <button className="btn btn-primary  mt-4" type="submit">
+            Confirm Your Order
           </button>
         </fieldset>
       </form>
