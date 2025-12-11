@@ -1,17 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useLoaderData, useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
 
 const Order = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const location = useLoaderData();
-  // console.log(location);
-const orderTime = new Date();
+  const orderTime = new Date();
   const { user } = useAuth();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
+
   const { data: meal } = useQuery({
     queryKey: ["meal", id],
     queryFn: async () => {
@@ -20,115 +28,185 @@ const orderTime = new Date();
     },
   });
 
+  // Unique Region list
   const uniqueRegion = [...new Set(location.map((l) => l.region))];
-  console.log(uniqueRegion);
 
-  const [area,setArea] = useState('');
-  console.log(area);
+  // Get cities based on Region
+  const handleRegion = (region) => {
+    const filteredRegion = location.filter((l) => l.region === region);
+    return filteredRegion.map((r) => r.city);
+  };
 
-  const handleRegion = (region)=>{
-    const filteredRegion = location.filter(l=>l.region === region);
-    const  city = filteredRegion.map(r=>r.city);
-    return city;
-  }
-// console.log(orderTime);
+  // Reset form when meal + user data loads
+  useEffect(() => {
+    if (meal && user) {
+      reset({
+        foodName: meal.foodName,
+        price: meal.price,
+        chefId: meal.chefId,
+        userEmail: user.email,
+        userRegion: "",
+        userCity: "",
+        userArea: "",
+        quantity: "",
+      });
+    }
+  }, [meal, user, reset]);
+
+  // Submit handler
+  const handleOrder = (data) => {
+    const orderInfo = {
+      foodId: meal?._id,
+      foodName: data.foodName,
+      price: data.price,
+      chefId: data.chefId,
+      paymentStatus: "pending",
+      userEmail: data.userEmail,
+      userArea: data.userArea,
+      userCity: data.userCity,
+      userRegion: data.userRegion,
+      orderStatus: "pending",
+      orderTime: orderTime,
+      userAddress: `${data.userArea}, ${data.userCity}, ${data.userRegion}`,
+      quantity: data.quantity,
+    };
+
+    console.log(orderInfo);
+  };
+
   return (
     <div className="mt-5">
-        <h2 className="text-3xl font-bold text-center text-primary">Confirm Your Order</h2>
-      <fieldset className=" lg:max-w-[40%] mx-auto space-y-1 shadow p-5 mt-5 rounded-xl">
-        {/* meal name */}
-        <label className="label">Meal Name</label>
-        <input 
-          defaultValue={meal?.foodName}
-          readOnly
-          type="text"
-          className="input  w-full"
-          required
-        />
+      <h2 className="text-3xl font-bold text-center text-primary">
+        Confirm Your Order
+      </h2>
 
-        <div className="flex gap-5
-         flex-col md:flex-row">
-               <div className="flex-1">
-                {/* meal price */}
-        <label className="label">Price</label>
-        <input 
-          defaultValue={meal?.price}
-          readOnly
-          type="text"
-          className="input  w-full"
-          required
-        />
-        </div>
-       <div className="flex-1">
-         {/* quantity */}
-        <label className="label">Quantity</label>
-        <input  type="number" className="input  w-full" required />
-       </div>
-        </div>
+      <form onSubmit={handleSubmit(handleOrder)}>
+        <fieldset className="lg:max-w-[40%] mx-auto space-y-1 shadow p-5 mt-5 rounded-xl">
+          {/* Meal Name */}
+          <label className="label">Meal Name</label>
+          <input
+            readOnly
+            type="text"
+            className="input w-full"
+            {...register("foodName")}
+          />
 
-        {/* Chef Id */}
-        <label className="label">Chef Id</label>
-        <input 
-          defaultValue={meal?.chefId}
-          readOnly
-          type="text"
-          className="input  w-full"
-          required
-        />
-        {/* user email */}
-        <label className="label">Email</label>
-        <input 
-          defaultValue={user?.email}
-          readOnly
-          type="email"
-          className="input  w-full"
-          required
-        />
+          <div className="flex gap-5 flex-col md:flex-row">
+            {/* Price */}
+            <div className="flex-1">
+              <label className="label">Price</label>
+              <input
+                readOnly
+                type="text"
+                className="input w-full"
+                {...register("price")}
+              />
+            </div>
 
+            {/* Quantity */}
+            <div className="flex-1">
+              <label className="label">Quantity</label>
+              <input
+                type="number"
+                className="input w-full"
+                {...register("quantity", {
+                  required: "Quantity is required",
+                  validate: {
+                    positive: (v) =>
+                      parseInt(v) > 0 || "Quantity must be greater than 0",
+                    integer: (v) =>
+                      Number.isInteger(Number(v)) ||
+                      "Quantity must be a whole number",
+                  },
+                })}
+              />
+              {errors.quantity && (
+                <p className="text-red-500">{errors.quantity.message}</p>
+              )}
+            </div>
+          </div>
 
-        {/* user location */}
-        <label className="label">Region</label>
-        <select onChange={(e)=>setArea(e.target.value)} defaultValue="Select Region" className="select w-full">
-          <option disabled={true}>Select Region</option>
-            {
-                uniqueRegion.map((region,i)=><option key={i}>{region}</option>)
-            }
-          
-        </select>
+          {/* Chef ID */}
+          <label className="label">Chef ID</label>
+          <input
+            readOnly
+            type="text"
+            className="input w-full"
+            {...register("chefId")}
+          />
 
-               {/* user city */}
-        <label className="label">City</label>
-        <select defaultValue="Select city" className="select w-full">
-          <option disabled={true}>Select City</option>
-            {
-                handleRegion(area).map((city,i)=><option key={i}>{city}</option>)
-            }
-          
-        </select>
+          {/* Email */}
+          <label className="label">Email</label>
+          <input
+            readOnly
+            type="email"
+            className="input w-full"
+            {...register("userEmail")}
+          />
 
-        {/* area */}
-              <label className="label">Area</label>
-        <input 
-          type="text"
-          className="input  w-full"
-          required
-        />
-        {/* orrder time */}
-              <label className="label">Order Time</label>
-        <input 
-        defaultValue={orderTime}
-          type="text"
-          className="input  w-full"
-          
-        />
-        
+          {/* Region */}
+          <label className="label">Region</label>
+          <select
+            className="select w-full"
+            {...register("userRegion", { required: "Region is required" })}
+          >
+            <option value="" disabled>
+              Select Region
+            </option>
+            {uniqueRegion.map((region, i) => (
+              <option key={i} value={region}>
+                {region}
+              </option>
+            ))}
+          </select>
+          {errors.userRegion && (
+            <p className="text-red-500">{errors.userRegion.message}</p>
+          )}
 
-      <button className="btn btn-neutral mt-4" type="submit">
-        Proceed To Payment
-      </button>
+          {/* City */}
+          <label className="label">City</label>
+          <select
+            className="select w-full"
+            {...register("userCity", { required: "City is required" })}
+          >
+            <option value="" disabled>
+              Select City
+            </option>
+            {handleRegion(watch("userRegion")).map((city, i) => (
+              <option key={i} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+          {errors.userCity && (
+            <p className="text-red-500">{errors.userCity.message}</p>
+          )}
 
-      </fieldset>
+          {/* Area */}
+          <label className="label">Area</label>
+          <input
+            type="text"
+            className="input w-full"
+            {...register("userArea", { required: "Area is required" })}
+          />
+          {errors.userArea && (
+            <p className="text-red-500">{errors.userArea.message}</p>
+          )}
 
+          {/* Order Time */}
+          <label className="label">Order Time</label>
+          <input
+            readOnly
+            value={orderTime.toLocaleString()}
+            type="text"
+            className="input w-full"
+          />
+
+          <button className="btn btn-neutral mt-4" type="submit">
+            Proceed To Payment
+          </button>
+        </fieldset>
+      </form>
     </div>
   );
 };
