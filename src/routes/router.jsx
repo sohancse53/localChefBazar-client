@@ -11,7 +11,9 @@ import PrivateRoutes from "./PrivateRoutes";
 import Order from "../pages/Order/Order";
 import DashboardLayout from "../layouts/DashboardLayout";
 import DashboardHome from "../pages/dashboard/DashboardHome";
-import MyOrders from "../pages/dashboard/MyOrders";
+import MyOrders from "../pages/dashboard/MyOrder/MyOrders";
+import MyProfile from "../pages/dashboard/MyProfile/MyProfile";
+import MyReviews from "../pages/dashboard/MyReviews/MyReviews";
 
 const router = createBrowserRouter([
 
@@ -63,6 +65,14 @@ const router = createBrowserRouter([
             {
                path:'my-orders',
                 element:<MyOrders/>
+            },
+            {
+               path:'my-profile',
+                element:<MyProfile/>
+            },
+            {
+               path:'my-reviews',
+                element:<MyReviews/>
             },
         ]
         

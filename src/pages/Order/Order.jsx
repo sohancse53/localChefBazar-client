@@ -61,6 +61,7 @@ const Order = () => {
       foodId: meal?._id,
       foodName: data.foodName,
       price: data.price,
+      chefName:meal.chefName,
       chefId: data.chefId,
       paymentStatus: "pending",
       userEmail: data.userEmail,
