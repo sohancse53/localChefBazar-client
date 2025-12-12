@@ -107,7 +107,7 @@ const queryClient = useQueryClient();
               {meal?.foodName}
             </h1>
             <p className="text-lg text-gray-700 mb-4">
-              Chef: <span className="font-semibold">{meal?.chefName}</span>
+              Chef: <span className="font-semibold">{meal?.chefName}</span> <span className="text-secondary font-bold">({meal?.chefId})</span>
             </p>
 
             <div className="flex items-center gap-4 mb-4">

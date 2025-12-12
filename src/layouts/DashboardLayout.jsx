@@ -1,7 +1,8 @@
 import React from "react";
 import { CgProfile } from "react-icons/cg";
 import { FaClipboardList } from "react-icons/fa";
-import { MdOutlineReviews } from "react-icons/md";
+import { LuBookHeart } from "react-icons/lu";
+import { MdAddCircleOutline, MdOutlineReviews } from "react-icons/md";
 import { Link, Outlet } from "react-router";
 
 const DashboardLayout = () => {
@@ -13,7 +14,7 @@ const DashboardLayout = () => {
           className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
           data-tip="My Orders"
         >
-          <FaClipboardList />
+          <FaClipboardList size={20}/>
           <span className="is-drawer-close:hidden">My Orders</span>
         </Link>
       </li>
@@ -24,7 +25,7 @@ const DashboardLayout = () => {
           className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
           data-tip="My profile"
         >
-          <CgProfile />
+          <CgProfile size={20}/>
           <span className="is-drawer-close:hidden">My Profile</span>
         </Link>
       </li>
@@ -35,8 +36,30 @@ const DashboardLayout = () => {
           className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
           data-tip="My reviews"
         >
-          <MdOutlineReviews />
+          <MdOutlineReviews size={20}/>
           <span className="is-drawer-close:hidden">My Reviews</span>
+        </Link>
+      </li>
+
+      <li>
+        <Link
+          to={"/dashboard/my-favorite"}
+          className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="My Favorite Meals"
+        >
+          <LuBookHeart size={20}/>
+          <span className="is-drawer-close:hidden">My Favorite Meals</span>
+        </Link>
+      </li>
+
+      <li>
+        <Link
+          to={"/dashboard/create-meal"}
+          className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Create a Meal"
+        >
+          <MdAddCircleOutline size={20}/>
+          <span className="is-drawer-close:hidden">Create a Meal</span>
         </Link>
       </li>
 

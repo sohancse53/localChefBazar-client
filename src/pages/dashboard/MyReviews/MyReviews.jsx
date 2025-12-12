@@ -4,7 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../../components/Spinner/Spinner";
 import { MdDeleteForever, MdOutlineSystemUpdateAlt } from "react-icons/md";
-import { useForm } from "react-hook-form";
+
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
@@ -24,7 +24,7 @@ const MyReviews = () => {
     queryKey: ["reviews", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `http://localhost:3000/reviews?reviewerEmail=${user?.email}`
+        `/reviews?reviewerEmail=${user?.email}`
       );
       return res.data;
     },

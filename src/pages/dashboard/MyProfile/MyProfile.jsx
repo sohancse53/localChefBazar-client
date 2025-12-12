@@ -49,37 +49,48 @@ const MyProfile = () => {
             </p>
           </div>
 
-        <div className="flex gap-5">
-              {/* Role */}
-          <div>
-            <p className="text-sm text-gray-400">Role</p>
-            <span className="inline-block px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-semibold">
-              {person.role}
-            </span>
+          <div className="flex gap-5">
+            {/* Role */}
+            <div>
+              <p className="text-sm text-gray-400">Role</p>
+              <span className="inline-block px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 font-semibold">
+                {person.role}
+              </span>
+            </div>
+
+            {/* Status */}
+            <div>
+              <p className="text-sm text-gray-400">Status</p>
+              <span
+                className={`inline-block px-3 py-1 rounded-full font-semibold ${
+                  person.status === "active"
+                    ? "bg-green-100 text-green-800"
+                    : "bg-red-100 text-red-800"
+                }`}
+              >
+                {person.status}
+              </span>
+            </div>
           </div>
 
-          {/* Status */}
-          <div>
-            <p className="text-sm text-gray-400">Status</p>
-            <span
-              className={`inline-block px-3 py-1 rounded-full font-semibold ${
-                person.status === "active"
-                  ? "bg-green-100 text-green-800"
-                  : "bg-red-100 text-red-800"
-              }`}
-            >
-              {person.status}
-            </span>
+          {/* action buttons */}
+          <div className="flex gap-2 items-center">
+            {person.role !== "admin" && (
+              <>
+                {person.role === "user" && (
+                  <button className="btn rounded-xl text-primary">
+                    Be a Chef <PiChefHatFill size={20} />
+                  </button>
+                )}
+
+                <button className="btn rounded-xl text-primary">
+                  Be an Admin <MdAdminPanelSettings size={20} />
+                </button>
+              </>
+            )}
           </div>
-        </div>
 
-              {/* action buttons */}
-              <div className="flex gap-2 items-center">
-                <button className="btn rounded-xl text-primary">Be a Chef <PiChefHatFill size={20}/></button>
-                <button className="btn rounded-xl text-primary">Be a Admin <MdAdminPanelSettings size={20}/> </button>
-              </div>
-
-
+          
         </div>
       </div>
     </div>

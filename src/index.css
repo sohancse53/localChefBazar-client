@@ -1,3 +1,9 @@
+ 
+ /* font montserrat */
+ @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+ 
  @import "tailwindcss";
  @plugin "daisyui" {
   themes: light --default, dark;
@@ -8,7 +14,10 @@
   --color-primary: #023A15;
   --color-secondary: #F09C96;
 }
-
+*{
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+}
 a.active{
   @apply border-b-3 border-secondary
 }
