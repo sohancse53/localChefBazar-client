@@ -4,6 +4,7 @@ import { FaClipboardList } from "react-icons/fa";
 import { LuBookHeart } from "react-icons/lu";
 import { MdAddCircleOutline, MdOutlineReviews } from "react-icons/md";
 import { RiSidebarUnfoldFill } from "react-icons/ri";
+import { SiManageiq } from "react-icons/si";
 import { Link, Outlet } from "react-router";
 
 const DashboardLayout = () => {
@@ -19,7 +20,7 @@ const DashboardLayout = () => {
           <span className="is-drawer-close:hidden">My Profile</span>
         </Link>
       </li>
-      
+
       <li>
         <Link
           to={"/dashboard/my-orders"}
@@ -62,6 +63,16 @@ const DashboardLayout = () => {
         >
           <MdAddCircleOutline size={20}/>
           <span className="is-drawer-close:hidden">Create a Meal</span>
+        </Link>
+      </li>
+      <li>
+        <Link
+          to={"/dashboard/manage-request"}
+          className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Manage Request"
+        >
+          <SiManageiq size={20}/>
+          <span className="is-drawer-close:hidden">Manage Request</span>
         </Link>
       </li>
 

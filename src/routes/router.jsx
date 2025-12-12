@@ -16,6 +16,7 @@ import MyProfile from "../pages/dashboard/MyProfile/MyProfile";
 import MyReviews from "../pages/dashboard/MyReviews/MyReviews";
 import MyFavorite from "../pages/dashboard/MyFavorite/MyFavorite";
 import CreateMeal from "../pages/dashboard/CreateMeal/CreateMeal";
+import ManageRequest from "../pages/dashboard/ManageRequest/ManageRequest";
 
 const router = createBrowserRouter([
 
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
             {
                path:'create-meal',
                 element:<CreateMeal/>
+            },
+            {
+               path:'manage-request',
+                element:<ManageRequest/>
             },
         ]
         
