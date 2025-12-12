@@ -68,7 +68,7 @@ const MyProfile = () => {
       {/* Right: User Details */}
       <div className="w-full md:w-2/3 p-8 flex flex-col justify-center">
         <h1 className="text-3xl font-bold text-gray-800">
-          {person.displayName}
+          {person.displayName} {person.role ==='chef' && <span className="text- font-light ">({person.chefId})</span>}
         </h1>
         <p className="text-gray-500 mt-1 break-words">{person.email}</p>
 
@@ -103,6 +103,12 @@ const MyProfile = () => {
                 {person.status}
               </span>
             </div>
+
+                  {/* if chef then chef if */}
+
+            
+
+
           </div>
 
           {/* action buttons */}
