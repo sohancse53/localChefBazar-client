@@ -5,6 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 import Spinner from "../../../components/Spinner/Spinner";
 import { PiChefHatFill } from "react-icons/pi";
 import { MdAdminPanelSettings } from "react-icons/md";
+import toast, { ToastBar } from "react-hot-toast";
 
 const MyProfile = () => {
   const axiosSecure = useAxiosSecure();
@@ -20,7 +21,38 @@ const MyProfile = () => {
     },
   });
 
+
+  const handleRoleRequest = (role)=>{
+    // console.log(id,role);
+    const roleRequestInfo = {
+      userName: person.displayName,
+      userEmail:person.email,
+      requestType:role,
+      requestStatus: "pending",
+      requestTime: new Date(),
+    }
+    console.log(roleRequestInfo);
+
+    axiosSecure.post('/role-request',roleRequestInfo)
+    .then(res=>{
+      if(res.data.insertedId){
+        toast.success(`request as ${role} has been sent`);
+      }else{
+        toast.error(`You Have already requested for the ${role} role`);
+      }
+    })
+    .catch(err=>{
+      toast.error('Something went wrong');
+    })
+
+
+  }
+
+
+
+
   if (isLoading) return <Spinner />;
+
 
   return (
     <div className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full flex flex-col md:flex-row overflow-hidden">
@@ -78,12 +110,12 @@ const MyProfile = () => {
             {person.role !== "admin" && (
               <>
                 {person.role === "user" && (
-                  <button className="btn rounded-xl text-primary">
+                  <button onClick={()=>handleRoleRequest('chef')} className="btn rounded-xl text-primary">
                     Be a Chef <PiChefHatFill size={20} />
                   </button>
                 )}
 
-                <button className="btn rounded-xl text-primary">
+                <button onClick={()=>handleRoleRequest('admin')} className="btn rounded-xl text-primary">
                   Be an Admin <MdAdminPanelSettings size={20} />
                 </button>
               </>

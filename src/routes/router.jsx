@@ -15,6 +15,7 @@ import MyOrders from "../pages/dashboard/MyOrder/MyOrders";
 import MyProfile from "../pages/dashboard/MyProfile/MyProfile";
 import MyReviews from "../pages/dashboard/MyReviews/MyReviews";
 import MyFavorite from "../pages/dashboard/MyFavorite/MyFavorite";
+import CreateMeal from "../pages/dashboard/CreateMeal/CreateMeal";
 
 const router = createBrowserRouter([
 
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
             {
                path:'my-favorite',
                 element:<MyFavorite/>
+            },
+            {
+               path:'create-meal',
+                element:<CreateMeal/>
             },
         ]
         

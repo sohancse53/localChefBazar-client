@@ -3,11 +3,23 @@ import { CgProfile } from "react-icons/cg";
 import { FaClipboardList } from "react-icons/fa";
 import { LuBookHeart } from "react-icons/lu";
 import { MdAddCircleOutline, MdOutlineReviews } from "react-icons/md";
+import { RiSidebarUnfoldFill } from "react-icons/ri";
 import { Link, Outlet } from "react-router";
 
 const DashboardLayout = () => {
   const links = (
     <>
+      <li>
+        <Link
+          to={"/dashboard/my-profile"}
+          className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="My profile"
+        >
+          <CgProfile size={20}/>
+          <span className="is-drawer-close:hidden">My Profile</span>
+        </Link>
+      </li>
+      
       <li>
         <Link
           to={"/dashboard/my-orders"}
@@ -19,16 +31,6 @@ const DashboardLayout = () => {
         </Link>
       </li>
 
-      <li>
-        <Link
-          to={"/dashboard/my-profile"}
-          className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-          data-tip="My profile"
-        >
-          <CgProfile size={20}/>
-          <span className="is-drawer-close:hidden">My Profile</span>
-        </Link>
-      </li>
 
       <li>
         <Link
@@ -71,30 +73,17 @@ const DashboardLayout = () => {
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Navbar */}
-        <nav className="navbar w-full bg-base-300">
+        <nav className="navbar w-full bg-base-300 flex items-center ">
           <label
             htmlFor="my-drawer-4"
             aria-label="open sidebar"
             className="btn btn-square btn-ghost"
           >
             {/* Sidebar toggle icon */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth="2"
-              fill="none"
-              stroke="currentColor"
-              className="my-1.5 inline-block size-4"
-            >
-              <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
-              <path d="M9 4v16"></path>
-              <path d="M14 10l2 2l-2 2"></path>
-            </svg>
+            <RiSidebarUnfoldFill size={25} />
           </label>
           <Link to={"/"} className="text-xl font-semibold text-primary">
-            Home Page
+            Home Page 
           </Link>
         </nav>
         {/* Page content here */}
