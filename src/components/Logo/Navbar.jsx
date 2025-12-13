@@ -65,11 +65,17 @@ const Navbar = () => {
             <button onClick={handleLogOut} className="btn btn-sm text-primary">
               Log Out
             </button>
-            <img
-              className="w-12 h-12 rounded-full border-2 border-secondary object-center"
-              src={user?.photoURL}
-              alt=""
-            />
+           <div className="relative w-14 h-14 flex justify-center items-center">
+  {/* Animated border */}
+  <div className=" absolute inset-0 rounded-full border-3 border-secondary animate-pulse"></div>
+
+  {/* Image (no animation) */}
+  <img
+    className="relative w-12 h-12 rounded-full object-cover border-2 border-secondary"
+    src={user?.photoURL}
+    alt=""
+  />
+</div>
           </div>
         ) : (
           <>

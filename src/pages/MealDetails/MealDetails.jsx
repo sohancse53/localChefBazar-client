@@ -133,7 +133,7 @@ const queryClient = useQueryClient();
               <span className="font-semibold">Chef Experience:</span>{" "}
               {meal?.chefsExperience} years
             </p>
-          </div>
+        </div>
 
           {/* Some  Buttons */}
           <div className="flex gap-4 flex-wrap items-center">
@@ -141,8 +141,8 @@ const queryClient = useQueryClient();
             <Link to={`/order/${meal?._id}`} className="btn btn-xs  btn-primary">Order Now</Link>
 
             {/* review button */}
-            <button onClick={handleModal} className="btn btn-xs  btn-secondary">
-              Review <MdOutlineReviews />
+            <button onClick={handleModal} className="btn btn-xs  btn-secondary ">
+             Give Review <MdOutlineReviews size={20} />
             </button>
 
             {/* favorite button */}

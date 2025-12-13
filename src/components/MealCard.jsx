@@ -2,9 +2,9 @@ import { Link } from "react-router";
 
 const MealCard = ({ meal }) => {
   return (
-    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-100">
+    <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-100 flex flex-col">
       {/* Food Image */}
-      <div className="relative">
+      <div className="relative flex-1">
         <img
           src={meal.foodImage}
           alt={meal.foodName}

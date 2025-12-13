@@ -31,7 +31,7 @@ const OrderCard = ({ order }) => {
     </div>
     <div className="bg-primary-50 p-2 rounded-lg shadow-sm">
       <p className="font-medium text-primary-700">Delivery Time</p>
-      <p className="font-semibold">{order?.orderTime}</p>
+      <p className="font-semibold">{new Date(order?.orderTime).toLocaleString()}</p>
     </div>
     <div className="bg-secondary-50 p-2 rounded-lg shadow-sm">
       <p className="font-medium text-secondary-700">Payment Status</p>
