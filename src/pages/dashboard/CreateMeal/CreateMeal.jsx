@@ -196,7 +196,7 @@ const CreateMeal = () => {
         <label className="label">Upload Food Image</label>
         <input
           type="file"
-          className="file-input w-full"
+          className="file-input w-full file-input-success"
           {...register("photo", { required: "Please Upload an Image" })}
         />
         {errors.photo && (
