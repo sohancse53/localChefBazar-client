@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Spinner from "../../../components/Spinner/Spinner";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const CreateMeal = () => {
+  const [loading,setLoading]=useState(false);
+  const [foodImage,setFoodImage] = useState();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
@@ -27,7 +31,49 @@ const CreateMeal = () => {
     formState: { errors },
   } = useForm();
 
-  const handleCreateMeal = (data) => {};
+
+  const handleCreateMeal =async (data) => {
+    setLoading(true);
+    const imgbbURl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`;
+    const photo = data.photo[0]
+    const formdata = new FormData();
+    formdata.append('image',photo)
+    // console.log(photo);
+
+    const res =await axios.post(imgbbURl,formdata)
+    const imageUrl = res.data.data.url;
+    console.log(imageUrl);
+
+    const mealInfo = {
+      foodName: data.foodName,
+      price:data.price,
+      rating:data.rating,
+      ingredients:data.ingredients,
+      chefName:data.chefName,
+      chefId:data.chefId,
+      chefEmail:data.chefEmail,
+      chefsExperience:data.chefsExperience,
+      estimatedDeliveryTime:data.estimatedDeliveryTime,
+      foodImage:imageUrl,
+      deliveryArea:data.deliveryArea,
+      createdAt:new Date()
+    }
+
+   axiosSecure.post('/meals',mealInfo)
+    .then(res=>{
+      if(res.data.insertedId){
+        toast.success('Meal added');
+        setLoading(false)
+      }
+    })
+    .catch(err=>{
+      toast.error(`something went wrong ${err.message}`);
+    })
+
+
+    console.log(mealInfo);
+
+  };
 
   if (isLoading) return <Spinner />;
 
@@ -59,9 +105,9 @@ const CreateMeal = () => {
         <label className="label">Food Price</label>
         <input
           placeholder="Food Price"
-          type="text"
+          type="number"
           className="input w-full"
-          {...register("foodPrice", {
+          {...register("price", {
             required: "please enter Food price",
             min: {
               value: 1,
@@ -70,8 +116,8 @@ const CreateMeal = () => {
           })}
         />
 
-        {errors.foodPrice && (
-          <p className="text-red-400">{errors.foodPrice.message}</p>
+        {errors.price && (
+          <p className="text-red-400">{errors.price.message}</p>
         )}
 
         {/* Food rating */}
@@ -141,24 +187,76 @@ const CreateMeal = () => {
               placeholder="Chef email"
               type="text"
               className="input w-full"
-              {...register("email")}
+              {...register("chefEmail")}
             />
           </div>
         </div>
 
-        {/* foodImage */}
+        {/* photo */}
         <label className="label">Upload Food Image</label>
         <input
           type="file"
           className="file-input w-full"
-          {...register("foodImage", { required: "Please Upload an Image" })}
+          {...register("photo", { required: "Please Upload an Image" })}
         />
-        {errors.foodImage && (
-          <p className="text-red-400">{errors.foodImage.message}</p>
+        {errors.photo && (
+          <p className="text-red-400">{errors.photo.message}</p>
         )}
 
+
+          {/* ---------------------------- */}
+
+          <div className="flex flex-col lg:flex-row gap-2">
+          <div>
+            {/* Chef estimated delivery time */}
+            <label className="label">Estimated Delivery Time</label>
+            <input
+              
+              placeholder="Estimated Delivery Time"
+              type="text"
+              className="input w-full"
+              {...register("estimatedDeliveryTime",{required:"please fill up"})}
+            />
+             {errors.estimatedDeliveryTime && (
+          <p className="text-red-400">{errors.estimatedDeliveryTime.message}</p>
+        )}
+          </div>
+          <div>
+            {/* Chef experience */}
+            <label className="label">Chef Experience</label>
+            <input
+            
+              placeholder="Chef Experience"
+              type="text"
+              className="input w-full"
+              {...register("chefsExperience",{required:"please fill up"})}
+            />
+             {errors.chefsExperience && (
+          <p className="text-red-400">{errors.chefsExperience.message}</p>
+        )}
+          </div>
+          <div>
+            {/* delivery area */}
+            <label className="label">Delivery Area</label>
+            <input
+            
+              placeholder="Delivery Area"
+              type="text"
+              className="input w-full"
+              {...register("deliveryArea",{required:"please set an delivery area"})}
+            />
+             {errors.deliveryArea && (
+          <p className="text-red-400">{errors.deliveryArea.message}</p>
+        )}
+          </div>
+       
+        </div>
+
+          {/* ---------------------------- */}
+
+
         <button className="btn btn-primary  mt-4" type="submit">
-          Add Meal
+          Add Meal {loading&& <span className="loading loading-spinner"></span>}
         </button>
       </form>
     </div>
