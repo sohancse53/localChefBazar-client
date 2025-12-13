@@ -6,8 +6,10 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Spinner from "../../../components/Spinner/Spinner";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const CreateMeal = () => {
+  const navigate = useNavigate()
   const [loading,setLoading]=useState(false);
   const [foodImage,setFoodImage] = useState();
   const axiosSecure = useAxiosSecure();
@@ -64,6 +66,7 @@ const CreateMeal = () => {
       if(res.data.insertedId){
         toast.success('Meal added');
         setLoading(false)
+        navigate('/dashboard/my-meals')
       }
     })
     .catch(err=>{

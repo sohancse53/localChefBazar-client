@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import Spinner from "../../../components/Spinner/Spinner";
 import { MdSystemUpdateAlt } from "react-icons/md";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const UpdateMeal = () => {
   const [loading, setLoading] = useState(false);
@@ -41,6 +42,7 @@ const UpdateMeal = () => {
     };
 
     axiosSecure.patch(`/meal/${id}`,UpdatedMealInfo).then((res) => {
+        console.log(res.data);
       if (res.data.modifiedCount) {
         Swal.fire({
           position: "top-end",
@@ -49,12 +51,27 @@ const UpdateMeal = () => {
           showConfirmButton: false,
           timer: 2000,
         });
+        setLoading(false);
       }
-    });
+     else if(res.data.matchedCount){
+        toast('You have not update anything',{
+            style:{
+                color:'red',
+                border:'2px solid green'
+                
+            }
+        });
+
+        setLoading(false);
+      }
+    })
+    .catch(err=>{
+        toast.error("Something Went Wrong")
+    })
 
     console.log(UpdatedMealInfo);
 
-    setLoading(false);
+    
   };
 
   if (isLoading || !meal) return <Spinner />;

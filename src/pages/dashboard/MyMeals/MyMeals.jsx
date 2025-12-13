@@ -8,7 +8,7 @@ import MyMealCard from "./MyMealCard";
 const MyMeals = () => {
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
-     const { data: meals ,isLoading} = useQuery({
+     const { data: meals ,isLoading,refetch} = useQuery({
     queryKey: ["meals",user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`meals?chefEmail=${user.email}`);
@@ -26,7 +26,7 @@ const MyMeals = () => {
 
      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
         {meals.map((meal) => (
-          <MyMealCard key={meal._id} meal={meal} />
+          <MyMealCard refetch={refetch} key={meal._id} meal={meal} />
         ))}
       </div>
 
