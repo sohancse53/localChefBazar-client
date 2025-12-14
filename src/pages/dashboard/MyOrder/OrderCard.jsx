@@ -19,7 +19,7 @@ const OrderCard = ({ order }) => {
       className={`px-3 py-1 text-xs font-semibold rounded-full capitalize ${
         order?.orderStatus === "delivered"
           ? "bg-green-100 text-green-700"
-          : order?.orderStatus === "preparing"
+          : order?.orderStatus === "cancelled"
           ? "bg-yellow-100 text-yellow-700"
           : "bg-gray-100 text-gray-600"
       }`}
@@ -82,7 +82,7 @@ const OrderCard = ({ order }) => {
   </div>
 
   {/* Action */}
-  {order?.paymentStatus !== "paid" && (
+  {order?.orderStatus == "accepted" && (
     <button className="mt-5  btn bg-primary  text-white py-2.5 rounded-xl font-semibold hover:bg-primary/80  transition">
       Pay Now
     </button>
