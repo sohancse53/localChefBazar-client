@@ -1,5 +1,6 @@
 import React from "react";
 import { CgProfile } from "react-icons/cg";
+import { CiSquareQuestion } from "react-icons/ci";
 import { FaClipboardList } from "react-icons/fa";
 import { LuBookHeart } from "react-icons/lu";
 import { MdAddCircleOutline, MdOutlineReviews } from "react-icons/md";
@@ -65,6 +66,18 @@ const DashboardLayout = () => {
           <span className="is-drawer-close:hidden">Create a Meal</span>
         </Link>
       </li>
+
+      <li>
+        <Link
+          to={"/dashboard/meal-order-request"}
+          className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Meal Order request"
+        >
+          <CiSquareQuestion size={20}/>
+          <span className="is-drawer-close:hidden">Meal Order request</span>
+        </Link>
+      </li>
+
 
       <li>
         <Link

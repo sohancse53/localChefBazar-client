@@ -19,6 +19,7 @@ import CreateMeal from "../pages/dashboard/CreateMeal/CreateMeal";
 import ManageRequest from "../pages/dashboard/ManageRequest/ManageRequest";
 import MyMeals from "../pages/dashboard/MyMeals/MyMeals";
 import UpdateMeal from "../pages/dashboard/MyMeals/UpdateMeal";
+import MealOrderRequest from "../pages/dashboard/MyMeals/MealOrderRequest";
 
 
 const router = createBrowserRouter([
@@ -95,6 +96,10 @@ const router = createBrowserRouter([
             {
                path:'update-meal/:id',
                 element:<UpdateMeal/>
+            },
+            {
+               path:'meal-order-request',
+                element:<MealOrderRequest/>
             },
             {
                path:'manage-request',

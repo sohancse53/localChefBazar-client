@@ -20,9 +20,9 @@ const MyOrders = () => {
 
     return (
         <div>
-           <h1 className='text-3xl font-bold'>My Orders- <span className='text-secondary'>{orders.length}</span></h1>
+           <h1 className='text-3xl font-bold text-center my-4'>My Orders- <span className='text-secondary'>{orders.length}</span></h1>
 
-           <div className='grid grid-cols-1 md:grid-cols-3 gap-4' >
+           <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-5' >
             {
                 orders.map(order=><OrderCard
                      key={order?._id}

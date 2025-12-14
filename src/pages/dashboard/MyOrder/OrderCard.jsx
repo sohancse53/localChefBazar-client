@@ -2,62 +2,93 @@ import React from "react";
 
 const OrderCard = ({ order }) => {
   return (
-    <div className="w-full max-w-sm bg-white shadow-lg rounded-2xl border border-gray-200 p-5 hover:shadow-2xl transition-transform transform hover:scale-105 duration-300">
-  {/* Food Name & Status */}
-  <div className="flex justify-between items-center mb-4">
-    <h2 className="text-xl font-bold text-primary-600">{order?.foodName}</h2>
+    <div className=" bg-white rounded-2xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 p-5 flex flex-col">
+
+  {/* Header */}
+  <div className="flex items-start justify-between mb-4 flex-1">
+    <div>
+      <h2 className="text-lg font-bold text-gray-900">
+        {order?.foodName}
+      </h2>
+      <p className="text-xs text-gray-500 mt-1">
+        {order?._id}
+      </p>
+    </div>
+
     <span
-      className={`px-3 py-1 text-sm font-semibold rounded-full ${
+      className={`px-3 py-1 text-xs font-semibold rounded-full capitalize ${
         order?.orderStatus === "delivered"
-          ? "bg-green-100 text-green-800"
+          ? "bg-green-100 text-green-700"
           : order?.orderStatus === "preparing"
-          ? "bg-yellow-100 text-yellow-800"
-          : "bg-gray-100 text-gray-700"
+          ? "bg-yellow-100 text-yellow-700"
+          : "bg-gray-100 text-gray-600"
       }`}
     >
       {order?.orderStatus}
     </span>
   </div>
 
-  {/* Order Details */}
-  <div className="grid grid-cols-2 gap-3 text-gray-700 text-sm mb-4">
-    <div className="bg-primary-50 p-2 rounded-lg shadow-sm">
-      <p className="font-medium text-primary-700">Price</p>
-      <p className="font-semibold">${order?.price}</p>
+  {/* Divider */}
+  <div className="border-t border-dashed my-4"></div>
+
+  {/* Order Info */}
+  <div className="grid grid-cols-2 gap-3 text-sm">
+    <div className="bg-gray-50 rounded-lg p-3">
+      <p className="text-gray-500">Price</p>
+      <p className="font-semibold text-gray-900">${order?.price}</p>
     </div>
-    <div className="bg-secondary-50 p-2 rounded-lg shadow-sm">
-      <p className="font-medium text-secondary-700">Quantity</p>
-      <p className="font-semibold">{order?.quantity}</p>
+
+    <div className="bg-gray-50 rounded-lg p-3">
+      <p className="text-gray-500">Quantity</p>
+      <p className="font-semibold text-gray-900">{order?.quantity}</p>
     </div>
-    <div className="bg-primary-50 p-2 rounded-lg shadow-sm">
-      <p className="font-medium text-primary-700">Delivery Time</p>
-      <p className="font-semibold">{new Date(order?.orderTime).toLocaleString()}</p>
+
+    <div className="bg-gray-50 rounded-lg p-3 col-span-2">
+      <p className="text-gray-500">Order Time</p>
+      <p className="font-semibold text-gray-900">
+        {new Date(order?.orderTime).toLocaleString()}
+      </p>
     </div>
-    <div className="bg-secondary-50 p-2 rounded-lg shadow-sm">
-      <p className="font-medium text-secondary-700">Payment Status</p>
-      <p className="font-semibold">{order?.paymentStatus}</p>
+
+    <div className="bg-gray-50 rounded-lg p-3 col-span-2">
+      <p className="text-gray-500">Payment Status</p>
+      <p
+        className={`font-semibold ${
+          order?.paymentStatus === "paid"
+            ? "text-green-600"
+            : "text-red-600"
+        }`}
+      >
+        {order?.paymentStatus}
+      </p>
     </div>
   </div>
 
   {/* Chef Info */}
-  <div className="border-t pt-3 mt-3 flex justify-between text-gray-600 text-sm">
-    <div className="bg-primary-50 p-2 rounded-lg shadow-sm">
-      <p className="font-medium text-primary-700">Chef</p>
-      <p className="font-semibold">{order?.chefName}</p>
+  <div className="flex items-center justify-between mt-5  rounded-xl p-3">
+    <div>
+      <p className="text-xs text-primary ">Chef</p>
+      <p className="font-semibold text-primary ">
+        {order?.chefName}
+      </p>
     </div>
-    <div className="bg-secondary-50 p-2 rounded-lg shadow-sm">
-      <p className="font-medium text-secondary-700">Chef ID</p>
-      <p className="font-semibold">{order?.chefId}</p>
+
+    <div className="text-right">
+      <p className="text-xs text-primary ">Chef ID</p>
+      <p className="font-semibold text-primary ">
+        {order?.chefId}
+      </p>
     </div>
   </div>
 
-  {/* Action Badge */}
-  <div className="mt-4 flex justify-end">
-    <span className="bg-primary-100 text-primary-800 px-4 py-1 text-sm font-semibold rounded-full shadow-md hover:bg-primary-200 transition-colors">
+  {/* Action */}
+  {order?.paymentStatus !== "paid" && (
+    <button className="mt-5  btn bg-primary  text-white py-2.5 rounded-xl font-semibold hover:bg-primary/80  transition">
       Pay Now
-    </span>
-  </div>
+    </button>
+  )}
 </div>
+
 
   );
 };

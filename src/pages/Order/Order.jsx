@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
-import { useLoaderData, useParams } from "react-router";
+import { useLoaderData, useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 const Order = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -94,6 +95,7 @@ const Order = () => {
               text: "Your Order has been Confirmed.",
               icon: "success"
             });
+            navigate('/dashboard/my-orders');
           }
         });
       }
