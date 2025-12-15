@@ -13,7 +13,7 @@ const DashboardLayout = () => {
   const {role} = useRole();
   const links = (
     <>
-      <li>
+        <li>
         <Link
           to={"/dashboard/my-profile"}
           className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -23,9 +23,46 @@ const DashboardLayout = () => {
           <span className="is-drawer-close:hidden">My Profile</span>
         </Link>
       </li>
+
+
+      {/* for admin pages */}
+    {
+    role.role ==='admin' && <>
+    
    
 
+
       <li>
+        <Link
+          to={"/dashboard/manage-request"}
+          className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Manage Request"
+        >
+          <SiManageiq size={20}/>
+          <span className="is-drawer-close:hidden">Manage Request</span>
+        </Link>
+      </li>
+
+
+         <li>
+        <Link
+          to={"/dashboard/manage-user"}
+          className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Manage User"
+        >
+          <MdManageAccounts size={20}/>
+          <span className="is-drawer-close:hidden">Manage User</span>
+        </Link>
+      </li>
+    </>
+   }
+   
+
+   {/* user pages */}
+   {
+    role.role === 'user' && 
+    <>
+       <li>
         <Link
           to={"/dashboard/my-orders"}
           className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -58,8 +95,13 @@ const DashboardLayout = () => {
           <span className="is-drawer-close:hidden">My Favorite Meals</span>
         </Link>
       </li>
+      </>
+   }
 
-      <li>
+      {
+        role.role === 'chef' && <>
+        
+        <li>
         <Link
           to={"/dashboard/create-meal"}
           className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -93,29 +135,10 @@ const DashboardLayout = () => {
         </Link>
       </li>
 
+        </>
+      }
 
-      <li>
-        <Link
-          to={"/dashboard/manage-request"}
-          className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-          data-tip="Manage Request"
-        >
-          <SiManageiq size={20}/>
-          <span className="is-drawer-close:hidden">Manage Request</span>
-        </Link>
-      </li>
-
-
-         <li>
-        <Link
-          to={"/dashboard/manage-user"}
-          className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-          data-tip="Manage User"
-        >
-          <MdManageAccounts size={20}/>
-          <span className="is-drawer-close:hidden">Manage User</span>
-        </Link>
-      </li>
+      
 
     </>
   );
