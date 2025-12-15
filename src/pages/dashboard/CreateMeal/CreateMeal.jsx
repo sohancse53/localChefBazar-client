@@ -7,8 +7,11 @@ import Spinner from "../../../components/Spinner/Spinner";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import useRole from "../../../hooks/useRole";
+import Forbidden from "../../../components/Forbidden/Forbidden";
 
 const CreateMeal = () => {
+  const {role} = useRole();
   const navigate = useNavigate()
   const [loading,setLoading]=useState(false);
   const [foodImage,setFoodImage] = useState();
@@ -35,6 +38,10 @@ const CreateMeal = () => {
 
 
   const handleCreateMeal =async (data) => {
+    if(role.status==='fraud') {
+      toast.error('your are fraud');
+      return 
+    }
     setLoading(true);
     const imgbbURl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`;
     const photo = data.photo[0]
@@ -77,6 +84,9 @@ const CreateMeal = () => {
     console.log(mealInfo);
 
   };
+
+
+  if(role.status==='fraud') return<Forbidden/>
 
   if (isLoading) return <Spinner />;
 

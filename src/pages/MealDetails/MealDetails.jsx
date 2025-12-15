@@ -138,7 +138,7 @@ const queryClient = useQueryClient();
           {/* Some  Buttons */}
           <div className="flex gap-4 flex-wrap items-center">
             {/* order button */}
-            <Link to={`/order/${meal?._id}`} className="btn btn-xs  btn-primary">Order Now</Link>
+            <Link  to={`/order/${meal?._id}`} className="btn btn-xs  btn-primary">Order Now</Link>
 
             {/* review button */}
             <button onClick={handleModal} className="btn btn-xs  btn-secondary ">

@@ -4,16 +4,21 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import OrderCard from './OrderCard';
 import Spinner from '../../../components/Spinner/Spinner';
+import useRole from '../../../hooks/useRole';
 
 const MyOrders = () => {
+
     const axiosSecure = useAxiosSecure();
     const {user} = useAuth();
-    const {data:orders=[],isLoading} = useQuery({
+    
+    const {data:orders=[],isLoading,refetch} = useQuery({
         queryKey:['my-orders',user?.email],
         queryFn:async()=>{
             const res = await axiosSecure.get(`/orders?userEmail=${user?.email}`);
+            
             return res.data;
-        }
+        },
+         
     })
 
     if(isLoading) return <Spinner/>

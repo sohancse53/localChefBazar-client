@@ -5,8 +5,12 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useRole from "../../hooks/useRole";
+import Fraud from "../../components/Fraud/Fraud";
+import Forbidden from "../../components/Forbidden/Forbidden";
 
 const Order = () => {
+  const {role} = useRole();
   const navigate = useNavigate();
   const {
     register,
@@ -103,6 +107,8 @@ const Order = () => {
 
     console.log(orderInfo);
   };
+
+  if(role.status==='fraud') return <Forbidden/>
 
   return (
     <div className="mt-5">

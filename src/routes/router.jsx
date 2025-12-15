@@ -6,7 +6,6 @@ import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
 import Meals from "../pages/Meals/Meals";
 import MealDetails from "../pages/MealDetails/MealDetails";
-import PrivateRoute from "./PrivateRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import Order from "../pages/Order/Order";
 import DashboardLayout from "../layouts/DashboardLayout";
@@ -20,6 +19,11 @@ import ManageRequest from "../pages/dashboard/ManageRequest/ManageRequest";
 import MyMeals from "../pages/dashboard/MyMeals/MyMeals";
 import UpdateMeal from "../pages/dashboard/MyMeals/UpdateMeal";
 import MealOrderRequest from "../pages/dashboard/MyMeals/MealOrderRequest";
+import PaymentSuccess from "../pages/dashboard/Payments/PaymentSuccess";
+import PaymentCancel from "../pages/dashboard/Payments/PaymentCancel";
+import ManageUser from "../pages/dashboard/ManagerUser/ManageUser";
+import ChefRoutes from "./ChefRoutes";
+import AdminRoutes from "./AdminRoutes";
 
 
 const router = createBrowserRouter([
@@ -71,39 +75,61 @@ const router = createBrowserRouter([
             },
             {
                path:'my-orders',
-                element:<MyOrders/>
+                element:<PrivateRoutes><MyOrders/></PrivateRoutes>
             },
             {
                path:'my-profile',
-                element:<MyProfile/>
+                element:<PrivateRoutes><MyProfile/></PrivateRoutes>
             },
             {
                path:'my-reviews',
-                element:<MyReviews/>
+                element:<PrivateRoutes><MyReviews/></PrivateRoutes>
             },
             {
                path:'my-favorite',
-                element:<MyFavorite/>
+                element:<PrivateRoutes><MyFavorite/></PrivateRoutes>
             },
+
+            // chef route dibo
             {
                path:'create-meal',
-                element:<CreateMeal/>
+                element:<ChefRoutes><CreateMeal/></ChefRoutes>
             },
+                // chef route dibo
             {
                path:'my-meals',
-                element:<MyMeals/>
+                element:<ChefRoutes><MyMeals/></ChefRoutes>
             },
+                // chef route dibo
             {
                path:'update-meal/:id',
-                element:<UpdateMeal/>
+                element:<ChefRoutes><UpdateMeal/></ChefRoutes>
             },
+                // chef route dibo
             {
                path:'meal-order-request',
-                element:<MealOrderRequest/>
+                element:<ChefRoutes><MealOrderRequest/></ChefRoutes>
             },
+
+
+                // admin route dibo
             {
                path:'manage-request',
-                element:<ManageRequest/>
+                element:<AdminRoutes><ManageRequest/></AdminRoutes>
+            },
+                // admin route dibo
+            {
+               path:'manage-user',
+                element:<AdminRoutes><ManageUser/></AdminRoutes>
+            },
+
+            {
+               path:'payment-success',
+                element:<PaymentSuccess/>
+            },
+            {
+               path:'payment-cancel',
+                element:<PaymentCancel/>
             },
         ]
         

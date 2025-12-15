@@ -49,21 +49,22 @@ const ManageRequest = () => {
 
 
 // ------------------reject status-----------------------------------
-const handleRejected = (request)=>{
-    console.log(request);
-    axiosSecure.patch(`/role-request/${request._id}/rejected`,request)
-    .then(res=>{
-        if(res.data.modifiedCount){
-            toast.success("the request has been Rejected")
-            refetch();
-        }else{
-            toast.error('already rejected')
-        }
+const handleRejected = (request) => {
+  axiosSecure
+    .patch(`/role-request/${request._id}/rejected`)
+    .then((res) => {
+      if (res.data.alreadyRejected) {
+        toast.error("Already rejected");
+        return;
+      }
+
+      if (res.data.modifiedCount > 0) {
+        toast.success("The request has been rejected");
+        refetch();
+      }
     })
-    .catch(err=>{
-        toast("Something went Wrong")
-    })
-}
+    .catch(() => toast.error("Something went wrong"));
+};
 
 
 

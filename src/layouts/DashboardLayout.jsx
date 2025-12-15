@@ -3,12 +3,14 @@ import { CgProfile } from "react-icons/cg";
 import { CiSquareQuestion } from "react-icons/ci";
 import { FaClipboardList } from "react-icons/fa";
 import { LuBookHeart } from "react-icons/lu";
-import { MdAddCircleOutline, MdOutlineReviews } from "react-icons/md";
+import { MdAddCircleOutline, MdManageAccounts, MdOutlineReviews } from "react-icons/md";
 import { RiSidebarUnfoldFill } from "react-icons/ri";
 import { SiManageiq, SiMyget } from "react-icons/si";
 import { Link, Outlet } from "react-router";
+import useRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
+  const {role} = useRole();
   const links = (
     <>
       <li>
@@ -21,6 +23,7 @@ const DashboardLayout = () => {
           <span className="is-drawer-close:hidden">My Profile</span>
         </Link>
       </li>
+   
 
       <li>
         <Link
@@ -99,6 +102,18 @@ const DashboardLayout = () => {
         >
           <SiManageiq size={20}/>
           <span className="is-drawer-close:hidden">Manage Request</span>
+        </Link>
+      </li>
+
+
+         <li>
+        <Link
+          to={"/dashboard/manage-user"}
+          className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+          data-tip="Manage User"
+        >
+          <MdManageAccounts size={20}/>
+          <span className="is-drawer-close:hidden">Manage User</span>
         </Link>
       </li>
 

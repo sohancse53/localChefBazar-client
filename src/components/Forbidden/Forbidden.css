@@ -1,0 +1,35 @@
+/* slow floating animation */
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+.animate-bounce-slow {
+  animation: bounceSlow 3s ease-in-out infinite;
+}
+
+/* fade in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+.animate-fade-in-delay {
+  animation: fadeIn 1.3s ease forwards;
+}
+.animate-fade-in-delay-2 {
+  animation: fadeIn 1.6s ease forwards;
+}
+.animate-fade-in-delay-3 {
+  animation: fadeIn 1.9s ease forwards;
+}
+
+/* slide up fade */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slideUp 2s ease-out forwards;
+}

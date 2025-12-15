@@ -9,7 +9,7 @@ import Spinner from "../../../components/Spinner/Spinner";
 const MyFavorite = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-
+  console.log(user);
   const {
     data: favorites = [],
     isLoading,
