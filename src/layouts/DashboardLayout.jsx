@@ -161,12 +161,13 @@ const DashboardLayout = () => {
         {/* Navbar */}
         <nav className="navbar w-full bg-base-300 flex items-center ">
           <label
+          data-tip="Side Bar"
             htmlFor="my-drawer-4"
             aria-label="open sidebar"
-            className="btn btn-square btn-ghost"
+            className="btn btn-square btn-ghost tooltip tooltip-right tooltip-info"
           >
             {/* Sidebar toggle icon */}
-            <RiSidebarUnfoldFill size={25} />
+            <RiSidebarUnfoldFill  size={25} />
           </label>
           <Link to={"/"} className="text-xl font-semibold text-primary">
             Home Page 
