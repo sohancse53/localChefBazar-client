@@ -25,12 +25,14 @@ import ManageUser from "../pages/dashboard/ManagerUser/ManageUser";
 import ChefRoutes from "./ChefRoutes";
 import AdminRoutes from "./AdminRoutes";
 import DashboardRedirect from "../pages/dashboard/DashBoardRedirect/DashBoardRedirect";
+import Spinner from "../components/Spinner/Spinner";
 
 
 const router = createBrowserRouter([
 
     // main layout
     {
+        hydrateFallbackElement:<Spinner/>,
         path:'/',
         Component:MainLayout,
         children:[

@@ -16,7 +16,7 @@ const DailyDeals = () => {
 
   if (isLoading) return <Spinner />;
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto  py-12">
       {/* 🌟 Layered Header: Simulated Parallax Scroll Reveal */}
       <div className="text-center mb-10 relative">
         {/* Background decorative element (moves slower → parallax illusion) */}

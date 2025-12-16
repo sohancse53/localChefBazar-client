@@ -41,7 +41,7 @@ const Banner = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }, // smooth spring
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
     },
   };
 
@@ -79,9 +79,9 @@ const Banner = () => {
   return (
     <section 
       ref={ref}
-      className="relative bg-white py-16 md:py-28 overflow-hidden"
+      className="mt-5 relative bg-primary/10 py-16 md:py-28 overflow-hidden rounded-2xl"
     >
-      {/* ✨ Subtle animated gradient orbs (non-distracting) */}
+    
       <motion.div
         animate={{ 
           scale: [1, 1.05, 1],
@@ -121,7 +121,7 @@ const Banner = () => {
             🍽️ Today's Fresh Picks
           </motion.div>
 
-          {/* Headline — clean, bold, with gradient */}
+        
           <motion.h1
             initial="hidden"
             animate={headingControls}
@@ -134,7 +134,7 @@ const Banner = () => {
             </span>
           </motion.h1>
 
-          {/* Paragraph — dark gray for readability */}
+        
           <motion.p
             initial="hidden"
             animate={paraControls}
@@ -144,7 +144,7 @@ const Banner = () => {
             Chef-prepared with quality ingredients. Hot, ready, and just a tap away.
           </motion.p>
 
-          {/* CTAs — modern & brand-aligned */}
+         
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
      
 
@@ -163,7 +163,7 @@ const Banner = () => {
            </Link>
           </div>
 
-          {/* Food Icons — subtle bounce */}
+         
           <motion.div 
             className="flex justify-center gap-8 text-3xl md:text-4xl"
             initial="hidden"
@@ -190,7 +190,7 @@ const Banner = () => {
         </div>
       </div>
 
-      {/* Bottom decorative accent — very subtle */}
+     
       <div className="absolute bottom-0 left-0 w-full">
         <div className="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
       </div>
