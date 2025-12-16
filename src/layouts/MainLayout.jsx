@@ -13,7 +13,7 @@ const MainLayout = () => {
            </div>
 
        </div>
-        <div className='max-w-10/12 mx-auto'>
+        <div className='max-w-10/12 mx-auto min-h-[80vh]'>
             <Outlet/>
         </div>
 

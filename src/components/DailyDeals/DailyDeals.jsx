@@ -4,6 +4,8 @@ import useAxios from "../../hooks/useAxios";
 import MealCard from "../MealCard";
 import Spinner from "../Spinner/Spinner";
 import { Fade, Slide, Zoom } from 'react-awesome-reveal';
+import { Link } from "react-router";
+import { FaArrowRight } from "react-icons/fa";
 const DailyDeals = () => {
   const axiosInstance = useAxios();
   const { data: dailyMeals = [], isLoading } = useQuery({
@@ -16,7 +18,7 @@ const DailyDeals = () => {
 
   if (isLoading) return <Spinner />;
   return (
-    <div className="container mx-auto  py-12">
+    <div className="py-12">
       {/* 🌟 Layered Header: Simulated Parallax Scroll Reveal */}
       <div className="text-center mb-10 relative">
         {/* Background decorative element (moves slower → parallax illusion) */}
@@ -71,7 +73,13 @@ const DailyDeals = () => {
             <MealCard meal={meal} />
           </Fade>
         ))}
+        
       </div>
+
+    <div className="w-full  flex justify-center">
+      <Link to={'/meals'} className="btn  btn-outline mt-16 text-primary rounded-2xl">Explore more <FaArrowRight /> </Link>
+    </div>
+
     </div>
   );
 };
