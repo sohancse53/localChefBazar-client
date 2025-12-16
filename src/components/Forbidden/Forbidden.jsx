@@ -52,7 +52,7 @@ const Forbidden = () => {
       </div>
 
       {/* Bottom Fade Animation */}
-      <div className="absolute bottom-0 w-full h-24 bg-gradient-to-t from-gray-200 to-transparent animate-slide-up"></div>
+     
     </div>
     );
 };

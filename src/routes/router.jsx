@@ -24,6 +24,7 @@ import PaymentCancel from "../pages/dashboard/Payments/PaymentCancel";
 import ManageUser from "../pages/dashboard/ManagerUser/ManageUser";
 import ChefRoutes from "./ChefRoutes";
 import AdminRoutes from "./AdminRoutes";
+import DashboardRedirect from "../pages/dashboard/DashBoardRedirect/DashBoardRedirect";
 
 
 const router = createBrowserRouter([
@@ -69,9 +70,15 @@ const router = createBrowserRouter([
         path:'dashboard',
         element:<DashboardLayout/>,
         children:[
+                {
+            index: true, // default /dashboard
+            element: <PrivateRoutes>
+                <DashboardRedirect />
+            </PrivateRoutes>
+        },
             {
-               index:true,
-                element:<DashboardHome/>
+               path:'stats',
+                element:<AdminRoutes><DashboardHome/></AdminRoutes>
             },
             {
                path:'my-orders',
@@ -79,6 +86,7 @@ const router = createBrowserRouter([
             },
             {
                path:'my-profile',
+            //    index:true,
                 element:<PrivateRoutes><MyProfile/></PrivateRoutes>
             },
             {

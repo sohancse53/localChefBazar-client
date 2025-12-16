@@ -8,7 +8,7 @@ const AdminRoutes = ({children}) => {
     const {user,loading} = useAuth()
     const {role,isLoading} = useRole();
     
-    if(loading || !user || isLoading){
+    if(loading || !user || isLoading || !role){
     return <Spinner/>
    }
    if(role.role!=='admin'){

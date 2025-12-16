@@ -4,8 +4,8 @@ import { Outlet } from 'react-router';
 
 const MainLayout = () => {
     return (
-        <div className=''>
-       <div className='bg-primary'>
+        <div className='relative'>
+       <div className='bg-primary sticky top-0 w-full z-50'>
 
            <div className='max-w-10/12 mx-auto'> 
             <Navbar/>
