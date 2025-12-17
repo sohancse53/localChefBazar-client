@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import MealCard from "../../components/MealCard";
 import Spinner from "../../components/Spinner/Spinner";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import useAxios from "../../hooks/useAxios";
 
 const Meals = () => {
+  const [searchValue,setSearchValue] = useState('')
   const [currentPage, setCurrentPage] = useState(0);
   const [sortOrder, SetSortOrder] = useState("");
 
@@ -14,10 +16,10 @@ const {
   data: meals = { result: [], count: 0 },
   isLoading,
 } = useQuery({
-  queryKey: ["meals", sortOrder, currentPage],
+  queryKey: ["meals", sortOrder, currentPage,searchValue],
   queryFn: async () => {
     const res = await axiosSecure.get(
-      `/meals?sortOrder=${sortOrder}&limit=10&skip=${currentPage * 10}`
+      `/meals?sortOrder=${sortOrder}&limit=10&skip=${currentPage * 10}&search=${searchValue.trim()}`
     );
     return res.data;
   },
@@ -31,13 +33,12 @@ const {
   };
 
 
-  console.log(currentPage);
 
 
   return (
     <div className="my-5 space-y-5 relative">
       <title>Meals</title>
-      <div className="flex  flex-col md:flex-row items-center gap-5 justify-center">
+      <div className="flex  flex-col md:flex-row items-center gap-5 justify-start">
         <h2 className="text-2xl  font-bold">
           Meals: <span className="text-secondary">{meals.count}</span>
         </h2>
@@ -52,7 +53,30 @@ const {
           <option>Sort By Ascending</option>
           <option>Sort By Descending</option>
         </select>
+
+        {/* search bar starts*/}
+            <div>
+        <label className="input">
+  <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <g
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      strokeWidth="2.5"
+      fill="none"
+      stroke="currentColor"
+    >
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.3-4.3"></path>
+    </g>
+  </svg>
+  <input onChange={(e)=>setSearchValue(e.target.value)} type="search" required placeholder="Search" />
+</label>
       </div>
+        {/* search bar ends*/}
+
+
+      </div>
+  
 
       {isLoading ? (
         <Spinner />
