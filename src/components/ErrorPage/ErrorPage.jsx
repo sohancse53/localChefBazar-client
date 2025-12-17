@@ -25,6 +25,7 @@ export default function ErrorPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-secondary/5 flex flex-col items-center justify-center p-4 relative">
       {/* Main Content */}
+      <title>Error</title>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
