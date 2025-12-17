@@ -6,8 +6,9 @@ import useAuth from '../hooks/useAuth';
 import Spinner from '../components/Spinner/Spinner';
 
 const MainLayout = () => {
-    const {loading,user} = useAuth();
-    if(loading || !user) return <Spinner/>
+    
+    const {loading} = useAuth();
+    if(loading) return <Spinner/>
     return (
         <div className='relative space-y-10'>
        <div className='bg-primary sticky top-0 w-full z-50'>

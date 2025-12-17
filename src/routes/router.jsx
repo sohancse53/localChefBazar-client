@@ -26,6 +26,7 @@ import ChefRoutes from "./ChefRoutes";
 import AdminRoutes from "./AdminRoutes";
 import DashboardRedirect from "../pages/dashboard/DashBoardRedirect/DashBoardRedirect";
 import Spinner from "../components/Spinner/Spinner";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 
 const router = createBrowserRouter([
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
     // main layout
     {
         hydrateFallbackElement:<Spinner/>,
-        errorElement:<p>Error</p>,
+        errorElement:<ErrorPage/>,
         path:'/',
         Component:MainLayout,
         children:[
