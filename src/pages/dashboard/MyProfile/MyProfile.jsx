@@ -56,6 +56,7 @@ const MyProfile = () => {
 
   return (
 <div className="min-h-screen ">
+  <title>My Profile</title>
   {/* Cover Image */}
   <div className="w-full h-56 bg-gradient-to-r from-primary to-secondary relative rounded-b-3xl shadow-lg ">
     {/* Profile Picture */}

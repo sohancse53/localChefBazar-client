@@ -10,31 +10,36 @@ const Meals = () => {
   const [sortOrder, SetSortOrder] = useState("");
 
   const axiosSecure = useAxiosSecure();
-  const {
-    data: meals = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["meals", sortOrder],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/meals?sortOrder=${sortOrder}`);
-      return res.data;
-    },
-  });
+const {
+  data: meals = { result: [], count: 0 },
+  isLoading,
+} = useQuery({
+  queryKey: ["meals", sortOrder, currentPage],
+  queryFn: async () => {
+    const res = await axiosSecure.get(
+      `/meals?sortOrder=${sortOrder}&limit=10&skip=${currentPage * 10}`
+    );
+    return res.data;
+  },
+});
 
+  const totalPages = Math.ceil(meals.count / 10);
   const handleSort = (e) => {
     console.log(e.target.value);
     SetSortOrder(e.target.value);
-    refetch();
+   
   };
+
 
   console.log(currentPage);
 
+
   return (
     <div className="my-5 space-y-5 relative">
+      <title>Meals</title>
       <div className="flex  flex-col md:flex-row items-center gap-5 justify-center">
         <h2 className="text-2xl  font-bold">
-          Meals: <span className="text-secondary">{meals.length}</span>
+          Meals: <span className="text-secondary">{meals.count}</span>
         </h2>
 
         {/* sort btn */}
@@ -53,27 +58,30 @@ const Meals = () => {
         <Spinner />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {meals.map((meal) => (
+          {meals.result.map((meal) => (
             <MealCard key={meal._id} meal={meal} />
           ))}
         </div>
       )}
 
-      {/* pagination */}
-      <div className=" flex  gap-2  justify-center overflow-x-scroll">
-      {
-        currentPage > 0 &&
-          <button onClick={() => setCurrentPage(currentPage - 1)}>
-          <FaAngleLeft className="btn btn-circle btn-xs md:btn-md" size={20} />
+      {/* pagination starts */}
+       <div className="flex gap-5 justify-center items-center">
+       
+         
+          <button disabled={currentPage < 1 ?true:false} className="tooltip btn btn-outline btn-xs md:btn-md " data-tip="Previous" onClick={() => setCurrentPage(currentPage - 1)}>
+          <FaAngleLeft  size={20} />
         </button>
-      }
+     
+      {/* numbers */}
+      <div className="flex gap-1 flex-wrap items-center justify-center">
+     
         {[
-          ...Array(10)
+          ...Array(totalPages)
             .keys()
             .map((i) => (
-              <p
+              <p key={i}
                 onClick={() => setCurrentPage(i)}
-                className={`btn btn-xs md:btn-md  ${
+                className={`btn btn-xs md:btn-md rounded-full ${
                   currentPage == i ? "bg-primary text-white" : ""
                 }`}
               >
@@ -81,10 +89,15 @@ const Meals = () => {
               </p>
             )),
         ]}
-        <button onClick={() => setCurrentPage(currentPage + 1)}>
-          <FaAngleRight className="btn btn-circle btn-xs md:btn-md " size={20} />
-        </button>
+       
       </div>
+       <button disabled={currentPage + 1 >= totalPages} className="tooltip btn btn-outline btn-xs md:btn-md " data-tip="Next" onClick={() => setCurrentPage(currentPage + 1)}>
+          <FaAngleRight  size={20} />
+        </button>
+       </div>
+      {/* pagination ends */}
+
+       
     </div>
   );
 };

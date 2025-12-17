@@ -57,6 +57,7 @@ const MyFavorite = () => {
 
   return (
     <div>
+      <title>My Favorites</title>
       <h2 className="text-3xl text-center font-bold">
         My favorites- <span className="text-secondary">{favorites.length}</span>
       </h2>

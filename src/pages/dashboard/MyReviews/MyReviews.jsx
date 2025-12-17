@@ -92,6 +92,7 @@ const MyReviews = () => {
 
   return (
     <div>
+      <title>My Reviews</title>
       <h2 className="text-3xl text-center font-bold">
         My Reviews- <span className="text-secondary">{reviews.length}</span>
       </h2>

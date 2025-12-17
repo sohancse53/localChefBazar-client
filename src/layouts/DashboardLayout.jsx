@@ -9,8 +9,12 @@ import { SiManageiq, SiMyget } from "react-icons/si";
 import { Link, Outlet } from "react-router";
 import useRole from "../hooks/useRole";
 import { IoIosStats } from "react-icons/io";
+import Spinner from "../components/Spinner/Spinner";
+import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
+  const {loading,user} = useAuth();
+
   const {role} = useRole();
   
   const links = (
@@ -154,6 +158,9 @@ const DashboardLayout = () => {
     </>
   );
 
+
+  if(!user || !role || loading) return <Spinner/>
+   
   return (
     <div className="drawer lg:drawer-open ">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />

@@ -73,6 +73,7 @@ const handleRejected = (request) => {
 
   return (
     <div>
+      <title>Manage Requests</title>
       <h2 className="text-3xl text-center font-bold">
         Total Request- <span className="text-secondary">{requests.length}</span>
       </h2>

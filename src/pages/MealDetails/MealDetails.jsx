@@ -78,6 +78,7 @@ const queryClient = useQueryClient();
 
   return (
     <div className="min-h-screen bg-white p-6 md:p-12">
+      <title>{meal?.foodName}</title>
       {/* Breadcrumb / Navigation */}
       <div className="mb-6 text-sm text-gray-500">
         <Link to="/" className="hover:text-green-800">

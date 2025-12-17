@@ -45,6 +45,7 @@ const ManageUser = () => {
   if (isLoading || !users) return <Spinner />;
   return (
     <div>
+      <title>Manage Users</title>
       <h2 className="text-3xl text-center font-bold">
         Total Request- <span className="text-secondary">{users.length}</span>
       </h2>

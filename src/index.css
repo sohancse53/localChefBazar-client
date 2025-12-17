@@ -19,5 +19,5 @@
   font-style: normal;
 }
 a.active{
-  @apply border-b-3 border-secondary
+  @apply border-b-3 border-primary text-secondary
 }

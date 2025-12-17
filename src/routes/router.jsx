@@ -33,6 +33,7 @@ const router = createBrowserRouter([
     // main layout
     {
         hydrateFallbackElement:<Spinner/>,
+        errorElement:<p>Error</p>,
         path:'/',
         Component:MainLayout,
         children:[
@@ -69,8 +70,10 @@ const router = createBrowserRouter([
 
 // dashboard layout 
     {
+
         path:'dashboard',
         element:<DashboardLayout/>,
+            hydrateFallbackElement:<Spinner/>,
         children:[
                 {
             index: true, // default /dashboard

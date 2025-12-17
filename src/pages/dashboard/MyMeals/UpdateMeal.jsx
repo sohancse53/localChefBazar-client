@@ -78,6 +78,7 @@ const UpdateMeal = () => {
 
   return (
     <div>
+      <title>Update Meal</title>
       <h2 className="text-3xl font-bold text-center text-secondary">
         Update Meal
       </h2>

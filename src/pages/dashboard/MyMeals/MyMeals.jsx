@@ -20,6 +20,7 @@ const MyMeals = () => {
   if(isLoading) return <Spinner/>
   return (
     <div>
+      <title>My Meals</title>
       <h2 className="text-3xl text-center font-bold">
         My Meals- <span className="text-secondary">{meals.length}</span>
       </h2>

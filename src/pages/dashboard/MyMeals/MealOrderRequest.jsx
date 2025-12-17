@@ -88,6 +88,7 @@ const MealOrderRequest = () => {
   if (isLoading || !role) return <Spinner />;
   return (
     <div>
+      <title>Meal Order Requests</title>
       <h1 className="text-3xl font-bold text-center my-4">
         Order Request-{" "}
         <span className="text-secondary">{requestMeals.length}</span>

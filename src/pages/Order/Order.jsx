@@ -112,8 +112,9 @@ const Order = () => {
 
   return (
     <div className="mt-5">
+      <title>Order food</title>
       <h2 className="text-3xl font-bold text-center text-primary">
-        Confirm Your Order
+         ORDER <br /> <span className="text-secondary">{meal?.foodName}</span>
       </h2>
 
       <form onSubmit={handleSubmit(handleOrder)}>

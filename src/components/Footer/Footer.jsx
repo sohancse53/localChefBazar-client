@@ -1,11 +1,11 @@
 import React from "react";
-import { FaFacebook, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaConnectdevelop, FaFacebook, FaTwitter, FaYoutube } from "react-icons/fa";
 import Logo from "../Logo/Logo";
 
 import { CgLock } from "react-icons/cg";
 import { CiClock1 } from "react-icons/ci";
 import { HiGlobeAsiaAustralia } from "react-icons/hi2";
-import { MdEmail } from "react-icons/md";
+import { MdEmail, MdOutlineDeveloperMode } from "react-icons/md";
 import { PiPhone } from "react-icons/pi";
 
 const Footer = () => {
@@ -16,8 +16,8 @@ const Footer = () => {
   <nav>
     <h6 className="footer-title">Contact Us</h6>
     <p className="flex items-center justify-center"> <HiGlobeAsiaAustralia size={25}/> Dhaka, Bangladesh</p>
-    <p className="flex items-center justify-center"><MdEmail size={25}/> info@acme.com</p>
-    <p className="flex items-center justify-center"> <PiPhone size={25}/> (555) 123-4567</p>
+    <p className="flex items-center justify-center"><MdEmail size={25}/> info@local_chef_bazar.com</p>
+    <p className="flex items-center justify-center"> <PiPhone size={25}/> +88 01775194511</p>
   </nav>
 
   {/* Working Hours */}
@@ -32,15 +32,16 @@ const Footer = () => {
   <nav>
     <h6 className="footer-title">Follow Us</h6>
     <div className="flex gap-4">
-      <a aria-label="Twitter" href="https://twitter.com">
+      <a data-tip='twitter' className="tooltip" target="blank" aria-label="Twitter" href="https://twitter.com">
         <FaTwitter size={25}/>
       </a>
-      <a aria-label="YouTube" href="https://youtube.com">
+      <a  data-tip='Youtube' className="tooltip" target="blank" aria-label="YouTube" href="https://youtube.com">
        <FaYoutube size={25}/>
       </a>
-      <a aria-label="Facebook" href="https://facebook.com">
+      <a data-tip='Facebook' className="tooltip"   target="blank" aria-label="Facebook" href="https://www.facebook.com">
        <FaFacebook size={25}/>
       </a>
+     
     </div>
   </nav>
 </footer>
@@ -52,7 +53,19 @@ const Footer = () => {
     <p>Local Chef Bazar © {new Date().getFullYear()}</p>
   </aside>
   <nav className="md:place-self-center md:justify-self-end">
-    <p>Providing customer service  2025</p>
+    {/* <p>Providing customer service  2025</p> */}
+   
+    <a 
+  className="tooltip font-semibold flex items-center gap-2" 
+  data-tip="Contact Developer Shoyaif Rahman" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  aria-label="developer" 
+  href="https://www.facebook.com/sohan.000000000000000000000000"
+>
+  <FaConnectdevelop/>
+  Developed By Md. Shoyaif Rahman
+</a>
   </nav>
 </footer>
     </>

@@ -39,6 +39,7 @@ const DashboardHome = () => {
 
   return (
     <div className="px-4 sm:px-6 lg:px-10">
+      <title>Statistics</title>
       <h2 className="text-xl sm:text-3xl text-center font-bold my-5 text-primary">
         Platform Statistics
       </h2>
