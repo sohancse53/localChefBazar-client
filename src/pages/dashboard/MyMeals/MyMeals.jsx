@@ -8,11 +8,11 @@ import MyMealCard from "./MyMealCard";
 const MyMeals = () => {
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
-     const { data: meals ,isLoading,refetch} = useQuery({
+     const { data: meals =[],isLoading,refetch} = useQuery({
     queryKey: ["meals",user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`meals?chefEmail=${user.email}`);
-      return res.data;
+      return res.data.result;
     },
   });
 

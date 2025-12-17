@@ -69,7 +69,7 @@ const {
       <path d="m21 21-4.3-4.3"></path>
     </g>
   </svg>
-  <input onChange={(e)=>setSearchValue(e.target.value)} type="search" required placeholder="Search" />
+  <input onChange={(e)=>setSearchValue(e.target.value)} type="search" required placeholder="Search Meals" />
 </label>
       </div>
         {/* search bar ends*/}
