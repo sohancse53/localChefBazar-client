@@ -68,7 +68,7 @@ The platform features role-based access control with three distinct user roles: 
 - Axios
 - SweetAlert2 & React Hot Toast
 - Recharts (admin stats)
-- Swiper (optional carousels)
+- Swiper 
 
 ### Dependencies
 
