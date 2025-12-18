@@ -25,27 +25,23 @@ The platform features role-based access control with three distinct user roles: 
 
 ### 2. Authentication & Security
 - Firebase Authentication (email/password registration & login).
-- Default role: "user", status: "active".
 - JWT-based secure API protection (httpOnly cookies).
-- Protected routes with proper redirect on reload.
-- Environment variables for Firebase config and MongoDB credentials.
 
-### 3. Layout
-- Responsive Navbar: Logo, Home, Meals, Dashboard (post-login), Login/Register or Logout + Profile Avatar.
-- Footer: Contact info, social links, working hours, copyright.
 
-### 4. Public Pages
+### 3. Public Pages
 - **Home**: Animated hero banner (Framer Motion), 6 dynamic daily meals, customer reviews section, extra custom section.
 - **Meals**: Card layout with sorting (price asc/desc), pagination (10 per page), "See Details" button (login guard).
-- **Meal Details** (Private): Full info, review display/submission, add to favorites, "Order Now".
 
-### 5. Private Pages & Dashboards
+
+### 4. Private Pages & Dashboards
+- **Meal Details** (Private): Full info, review display/submission, add to favorites, "Order Now".
 - **Order Page**: Auto-filled form, quantity selection, address input, total calculation, SweetAlert confirmation.
 - **User Dashboard**: My Profile, My Orders (with Stripe Pay button), My Reviews (update/delete), Favorite Meals (table with delete).
 - **Chef Dashboard**: Create Meal (image upload), My Meals (update/delete), Order Requests (Cancel/Accept/Deliver with live status updates).
 - **Admin Dashboard**: Manage Users (make fraud), Manage Requests (approve/reject + auto Chef ID generation), Platform Statistics (Recharts).
 
-### 6. Additional Features
+
+### 5. Additional Features
 - Profile page with "Be a Chef" / "Be an Admin" request buttons.
 - Real-time review & favorite updates with toast/SweetAlert notifications.
 - Stripe payment integration (pay button appears only when order accepted & payment pending).
@@ -54,11 +50,11 @@ The platform features role-based access control with three distinct user roles: 
 - Dynamic page titles on every route.
 - Fully mobile-responsive design with pleasing color contrast and clean spacing.
 
-### 7. Challenge Tasks Implemented
+### 6. Challenge I faced
 - JWT authentication for all protected routes/APIs.
 - react-hook-form used in **every** form.
 - Pagination on Meals page.
-- Secure deployment (no CORS/404/504 errors, no reload issues).
+- Secure deployment.
 
 ## Technologies & Packages Used
 
@@ -123,7 +119,7 @@ The platform features role-based access control with three distinct user roles: 
 ## 2. Backend Setup
 
 ```bash
-dc localChefBazar-server
+cd localChefBazar-server
 npm install
 ```
 Create `.env` file in the server root with the following content:
@@ -146,7 +142,7 @@ API will run on [http://localhost:5000](http://localhost:5000)
 Navigate to the client folder:
 
 ```bash
-dc ../localChefBazar-client  # or navigate to the client folder
+cd localChefBazar-client  # or navigate to the client folder
 defaults to your terminal's navigation method if needed.
 ```
 Install dependencies:
@@ -181,16 +177,7 @@ App will run on [http://localhost:5173](http://localhost:5173) (or similar port 
 ## 4. Additional Note 
 Add localhost (or your local domain) to Firebase Authorized Domains in the Firebase console for authentication to work locally.
 
-## Screenshots 
-*(Replace placeholders with actual image links)*
-- Home Page ![Home Page](path/to/homepage.png)
-- Meals Page with Pagination ![Meals Page](path/to/meals_page.png)
-- Dashboard (User/Chef/Admin) ![Dashboard](path/to/dashboard.png)
-- Meal Details & Reviews ![Meal Details](path/to/meal_details.png)
-- Admin Statistics (Recharts) ![Admin Statistics](path/to/admin_statistics.png)
 
-## Contributing 
-Contributions are welcome! Feel free to fork the repo, create a feature branch, and submit a pull request.
 
-## License 
-This project is open-source and available under the MIT License.
+
+
