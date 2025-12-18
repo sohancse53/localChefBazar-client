@@ -8,7 +8,7 @@ const MyMealCard = ({ meal, refetch }) => {
   const axiosSecure = useAxiosSecure();
 
   const handleMealDelete = (id) => {
-    console.log(id);
+    // console.log(id);
 
     Swal.fire({
       title: "Are you sure?",

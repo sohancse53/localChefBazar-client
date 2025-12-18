@@ -81,7 +81,7 @@ const CreateMeal = () => {
     })
 
 
-    console.log(mealInfo);
+    // console.log(mealInfo);
 
   };
 

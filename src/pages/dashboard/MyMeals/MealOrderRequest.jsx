@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 const MealOrderRequest = () => {
   const [loading, setLoading] = useState(false);
   const { role } = useRole();
-  console.log(role?.chefId);
+  // console.log(role?.chefId);
   const chefId = role?.chefId;
 
   const axiosSecure = useAxiosSecure();
@@ -30,7 +30,7 @@ const MealOrderRequest = () => {
 
   const handleAccept = (meal) => {
     setLoading(true);
-    console.log(meal);
+    // console.log(meal);
     axiosSecure
       .patch(`/order/accept/${meal._id}`)
       .then((res) => {
@@ -49,7 +49,7 @@ const MealOrderRequest = () => {
 
   const handleCancel = (meal) => {
     setLoading(true);
-    console.log(meal);
+    // console.log(meal);
     axiosSecure
       .patch(`/order/cancel/${meal._id}`)
       .then((res) => {
@@ -68,7 +68,7 @@ const MealOrderRequest = () => {
 
   const handleDeliver = (meal) => {
     setLoading(true);
-    console.log(meal);
+    // console.log(meal);
     axiosSecure
       .patch(`/order/deliver/${meal._id}`)
       .then((res) => {

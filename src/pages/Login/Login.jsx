@@ -16,7 +16,7 @@ const Login = () => {
       } = useForm();
 
       const handleLogin = (data)=>{
-        console.log(data.email);
+        // console.log(data.email);
         signInUser(data.email,data.password)
         .then(()=>{
             toast.success('login successful')

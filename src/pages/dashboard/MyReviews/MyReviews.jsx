@@ -44,7 +44,7 @@ const MyReviews = () => {
     const comment = e.target.comment.value;
     const rating = e.target.rating.value;
     const updatedReview = { comment, rating };
-    console.log(updatedReview);
+    // console.log(updatedReview);
     axiosSecure
       .patch(`/reviews/${review?._id}`, updatedReview)
       .then((res) => {

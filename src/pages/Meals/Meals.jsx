@@ -27,7 +27,7 @@ const {
 
   const totalPages = Math.ceil(meals.count / 10);
   const handleSort = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     SetSortOrder(e.target.value);
    
   };

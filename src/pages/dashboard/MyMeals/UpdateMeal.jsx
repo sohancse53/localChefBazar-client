@@ -42,7 +42,7 @@ const UpdateMeal = () => {
     };
 
     axiosSecure.patch(`/meal/${id}`,UpdatedMealInfo).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
       if (res.data.modifiedCount) {
         Swal.fire({
           position: "top-end",
@@ -69,7 +69,7 @@ const UpdateMeal = () => {
         toast.error("Something Went Wrong")
     })
 
-    console.log(UpdatedMealInfo);
+    // console.log(UpdatedMealInfo);
 
     
   };

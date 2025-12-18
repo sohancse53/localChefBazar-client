@@ -11,7 +11,7 @@ const PaymentSuccess = () => {
 
     axiosSecure.patch(`/payment-success?session_id=${sessionId}`)
       .then(res => {
-        console.log('payment updated', res.data);
+        // console.log('payment updated', res.data);
       });
   }, [axiosSecure, searchParams]);
 

@@ -21,20 +21,20 @@ const Register = () => {
 
   const handleRegister = (data) => {
     setLoading(true);
-    console.log(data);
+    // console.log(data);
     const imgbbURl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`;
 
     const photo = data.photo[0];
     registerUser(data.email, data.password)
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
 
         // store image and get photo url
         const formdata = new FormData();
         formdata.append("image", photo);
 
         axios.post(imgbbURl, formdata).then((result) => {
-          console.log(result.data.data.url);
+          // console.log(result.data.data.url);
           const photoURL = result.data.data.url;
           const userProfile = {
             displayName: data.name,
@@ -51,25 +51,25 @@ const Register = () => {
           };
           axiosSecure.post("/users", userInfo).then((res) => {
             if (res.data.insertedId) {
-              console.log("user created", res.data.insertedId);
+              // console.log("user created", res.data.insertedId);
             }
           });
 
           updateUserProfile(userProfile)
             .then(() => {
-              console.log("profile updated");
+              // console.log("profile updated");
               navigate(location.state || "/");
               toast.success('Registration successful');
             })
             .catch((err) => {
-              console.log(err);
+              // console.log(err);
               toast.error(err.message)
               setLoading(false);
             });
         });
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         toast.error(err.message);
          setLoading(false);
       });

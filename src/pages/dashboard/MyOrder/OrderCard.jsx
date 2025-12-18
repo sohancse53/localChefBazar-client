@@ -14,7 +14,7 @@ const OrderCard = ({ order }) => {
 
    }
    const res = await axiosSecure.post(`/create-checkout-session`,paymentInfo)
-   console.log(res.data.url);
+  //  console.log(res.data.url);
    window.location.assign(res.data.url);
   }
 

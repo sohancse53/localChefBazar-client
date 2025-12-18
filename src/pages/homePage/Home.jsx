@@ -8,7 +8,7 @@ import Spinner from '../../components/Spinner/Spinner';
 
 const Home = () => {
     const navigation = useNavigation();
-    console.log(navigation.state);
+    // console.log(navigation.state);
    
     return (
         <div className='space-y-2'>

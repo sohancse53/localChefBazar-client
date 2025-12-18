@@ -105,7 +105,7 @@ const Order = () => {
       }
     });
 
-    console.log(orderInfo);
+    // console.log(orderInfo);
   };
 
   if(role.status==='fraud') return <Forbidden/>
