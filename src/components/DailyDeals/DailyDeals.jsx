@@ -19,9 +19,9 @@ const DailyDeals = () => {
   if (isLoading) return <Spinner />;
   return (
     <div className="py-12">
-      {/* 🌟 Layered Header: Simulated Parallax Scroll Reveal */}
+     
       <div className="text-center mb-10 relative">
-        {/* Background decorative element (moves slower → parallax illusion) */}
+   
         <Slide 
           direction="down" 
           delay={0} 
@@ -55,7 +55,7 @@ const DailyDeals = () => {
         </Fade>
       </div>
 
-      {/* 🍽️ Meal Grid — Card Reveal with Depth & Stagger */}
+    
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {dailyMeals.map((meal, index) => (
           <Fade
@@ -63,10 +63,10 @@ const DailyDeals = () => {
             delay={500 + index * 80}
             duration={700}
             triggerOnce
-            fraction={0.2} // triggers earlier (as soon as 20% in view)
+            fraction={0.2} 
             className="will-change-transform"
             style={{
-              // Simulate depth: cards farther back start smaller & lower
+          
               transform: `translateY(20px) scale(0.98)`,
             }}
           >

@@ -82,7 +82,7 @@ export default function ErrorPage() {
         </motion.div>
       </motion.div>
 
-      {/* Floating Dots – Now Safe */}
+    
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {DOTS.map((dot) => (
           <motion.div
